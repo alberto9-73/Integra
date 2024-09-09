@@ -1,0 +1,22 @@
+body{
+ 
+
+background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(150,150,168,0.8379116777060689) 39%, rgba(0,212,255,1) 100%);
+}
+
+.login{
+  text-align: center;
+  font-size: larger;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode';
+  
+  padding: 8%;
+
+  width: 550px;
+  height: auto;
+  
+}
+.form{
+  background-color: rgba(253, 251, 249, 0.618);
+}
+
