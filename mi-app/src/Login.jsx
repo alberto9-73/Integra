@@ -1,5 +1,7 @@
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const URL_LOGIN = 'http://localhost/integra/api_login.php';
 
@@ -13,12 +15,13 @@ const enviarData = async (URL_LOGIN, data) => {
   });
   const json = await respuesta.json();
   console.log(json);
-  return respuesta;
+  return json;  // Cambié aquí para devolver json directamente
 };
 
 export default function Login(props) {
   const refEmail = useRef(null);
   const refClave = useRef(null);
+  const navigate = useNavigate(); // Hook para navegación
 
   const handleLogin = async () => {
     // Validar que ambos campos estén completos
@@ -34,19 +37,24 @@ export default function Login(props) {
 
     console.log(data);
     const respuestaJson = await enviarData(URL_LOGIN, data);
-    props.acceder(respuestaJson);
+
+    if (respuestaJson.success) { // Suponiendo que la respuesta contiene un campo "success"
+      props.acceder(respuestaJson);
+      navigate('/api_login.php'); // Redirige a la ruta de destino
+    } else {
+      alert('Credenciales incorrectas o error en el inicio de sesión.');
+    }
   };
 
   return (
     <>
-      <container>
+      <div className="container">
         <center>
           <div className="login">
             <div className="row">
               <div className="col sm-3">
                 <div className="card">
                   <div className="card-header">
-                   
                     <b>♾️ Ingresar</b>
                   </div>
                   <div className="form">
@@ -96,8 +104,7 @@ export default function Login(props) {
             </div>
           </div>
         </center>
-      </container>
+      </div>
     </>
   );
 }
-
